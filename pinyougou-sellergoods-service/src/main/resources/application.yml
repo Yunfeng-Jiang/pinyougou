@@ -1,0 +1,21 @@
+---
+eureka:
+  client:
+    fetch-registry: false
+    register-with-eureka: false
+    service-url:
+      defaultZone: "http://localhost:20880/eureka/"
+server:
+  port: 20880
+spring:
+  application:
+    name: provider-sellergoods-service
+  cloud:
+    config:
+      uri: "http://localhost:8080"
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/pinyougoudb?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC&characterEncoding=utf8
+    username: root
+    password: 123456
+

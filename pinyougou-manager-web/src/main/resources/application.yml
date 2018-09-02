@@ -1,0 +1,24 @@
+---
+eureka:
+  client:
+    service-url:
+      defaultZone: "http://localhost:20880/eureka/"
+server:
+  port: 8081
+spring:
+  application:
+    name: consumer-manager-web
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: 123456
+    url: "jdbc:mysql://localhost:3306/pinyougoudb?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC&characterEncoding=utf8"
+    cloud:
+        config:
+          discovery:
+            enabled: true
+            service-id: provider-sellergoods-service
+  mvc:
+    static-path-pattern: /static/**
+mybatis:
+  mapper-locations: com.pinyougou.mapper/*.xml

@@ -1,0 +1,12 @@
+##  ˝æ›‘¥≈‰÷√
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/pinyougoudb?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC&characterEncoding=utf8
+    username: root
+    password: 123456
+## Mybatis ≈‰÷√
+mybatis:
+  type-aliases-package: com.pinyougou.pojo
+  mapper-locations: com.pinyougou.mapper/*.xml
+
