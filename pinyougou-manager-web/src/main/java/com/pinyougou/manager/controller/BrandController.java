@@ -45,8 +45,9 @@ public class BrandController {
 	   return brandService.findOne(id);
     }
 
-    @RequestMapping(value = "/update",method = RequestMethod.POST)
-    public Result update(@RequestBody TbBrand tbBrand) { //必须添加@RequestBody注解，否则后台无法获取属性值，因为angular提交的是json对象，
+    @RequestMapping(value = "/update", method = RequestMethod.POST)
+    //必须添加@RequestBody注解，否则后台无法获取属性值，因为angular提交的是json对象
+    public Result update(@RequestBody TbBrand tbBrand) {
         try {
             brandService.update(tbBrand);
             return new Result(true, "修改成功！");
@@ -65,5 +66,10 @@ public class BrandController {
         return new Result(true, "删除成功！");
     }
 
+
+    @RequestMapping(value = "/search", method = RequestMethod.POST)
+    public PageResult search(@RequestBody TbBrand tbBrand, int page, int size) {
+        return brandService.findPage(tbBrand, page, size);
+    }
 
 }

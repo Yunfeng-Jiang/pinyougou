@@ -20,10 +20,8 @@
 	<!-- 分页组件结束 -->
 
 	<script type="text/javascript">
-		
 		var app=angular.module('pinyougou',['pagination']);
 		app.controller('brandController',function($scope,$http){
-			
 			//查询品牌列表
 			$scope.findAll=function(){
 				$http.get('../brand/findAll').success(
@@ -31,9 +29,8 @@
 						$scope.list=response;
 					}		
 				);				
-			}
-
-			//分页控件配置currentPage:当前页   totalItems :总记录数  itemsPerPage:每页记录数  perPageOptions :分页选项  onChange:当页码变更后自动触发的方法 
+			};
+			//分页控件配置currentPage:当前页   totalItems :总记录数  itemsPerPage:每页记录数  perPageOptions :分页选项  onChange:当页码变更后自动触发的方法
             $scope.paginationConf = {
                 currentPage: 1,
                 totalItems: 10,
@@ -42,14 +39,11 @@
                 onChange: function(){
                     $scope.reloadList();
                 }
-            }
-
+            };
             //刷新列表
             $scope.reloadList=function(){
-                //$scope.search( $scope.paginationConf.currentPage ,  $scope.paginationConf.itemsPerPage );
-                $scope.findPage( $scope.paginationConf.currentPage ,  $scope.paginationConf.itemsPerPage );
-            }
-
+                $scope.search( $scope.paginationConf.currentPage ,  $scope.paginationConf.itemsPerPage );
+            };
             //分页
             $scope.findPage=function(page,size){
                 $http.get('../brand/findPage?page='+page +'&size='+size).success(
@@ -58,8 +52,7 @@
                         $scope.paginationConf.totalItems=response.total;//更新总记录数
                     }
                 );
-            }
-
+            };
             // 新增
             $scope.save = function () {
                 var methodName = 'add';// 方法名
@@ -76,8 +69,7 @@
                         }
                     }
                 );
-            }
-
+            };
             // 查询实体
             $scope.findOne = function (id) {
                 $http.get('../brand/findOne?id=' + id).success(
@@ -85,8 +77,7 @@
                         $scope.entity = response;
                     }
                 );
-            }
-
+            };
              $scope.selectIds=[];//用户勾选的ID集合
              //用户勾选复选框
              $scope.updateSelection=function($event,id){
@@ -96,43 +87,33 @@
                      var index= $scope.selectIds.indexOf(id);//查找值的 位置
                      $scope.selectIds.splice(index,1);//参数1：移除的位置 参数2：移除的个数
                  }
-             }
-
+             };
              //删除
              $scope.dele=function(){
-
-
-                 if(confirm('确定要删除吗？')){
-                     $http.get('../brand/delete?ids='+$scope.selectIds).success(
-                             function(response){
-                                 if(response.success){
-                                     $scope.reloadList();//刷新
-                                 }else{
-                                     alert(response.message);
-                                 }
-                             }
-                     );
-                 }
-
-             }
-
-             /*$scope.searchEntity={};
+				 if(confirm('确定要删除吗？')){
+					 $http.get('../brand/delete?ids='+$scope.selectIds).success(
+							 function(response){
+								 if(response.success){
+									 $scope.reloadList();//刷新
+								 }else{
+									 alert(response.message);
+								 }
+							 }
+					 );
+				 }
+             };
+             $scope.searchEntity = {};
              //条件查询
-             $scope.search=function(page,size){
-
-                 $http.post('static/brand/search?page='+page +'&size='+size, $scope.searchEntity).success(
+             $scope.search = function(page,size){
+                 $http.post('../brand/search?page='+page +'&size='+size, $scope.searchEntity).success(
                      function(response){
                          $scope.list=response.rows;//显示当前页数据
                          $scope.paginationConf.totalItems=response.total;//更新总记录数
                      }
                  );
-
-             }*/
+             }
 		});
-		
-	
 	</script>
-    
 </head>
 <body class="hold-transition skin-red sidebar-mini" ng-app="pinyougou" ng-controller="brandController">
   <!-- .box-body -->

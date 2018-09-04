@@ -1,6 +1,7 @@
 package com.pinyougou.sellergoods.service;
 
 import com.pinyougou.entity.PageResult;
+import com.pinyougou.entity.Result;
 import com.pinyougou.pojo.TbBrand;
 
 import java.util.List;
@@ -13,7 +14,7 @@ import java.util.List;
 public interface BrandService {
     /**
      * 查询品牌集合
-     * @return
+     * @return List
      */
     List<TbBrand> findAll();
 
@@ -21,7 +22,7 @@ public interface BrandService {
      * 分页
      * @param pageNum 当前第几页
      * @param pageSize 每页记录数
-     * @return
+     * @return PageResult
      */
     PageResult findPage(int pageNum, int pageSize);
 
@@ -34,7 +35,7 @@ public interface BrandService {
     /**
      * 根据ID查询实体类
      * @param id
-     * @return
+     * @return TbBrand
      */
     TbBrand findOne(Long id);
 
@@ -49,5 +50,16 @@ public interface BrandService {
      * @param ids
      */
     void delete(Long[] ids);
+
+
+    /**
+     * 根据条件分页查询
+     * @param tbBrand 品牌VO
+     * @param pageNum 第几页
+     * @param pageSize 每页条数
+     * @return PageResult
+     */
+    PageResult findPage(TbBrand tbBrand, int pageNum, int pageSize);
+
 
 }
