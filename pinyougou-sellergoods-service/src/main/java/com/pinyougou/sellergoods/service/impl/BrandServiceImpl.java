@@ -12,6 +12,9 @@ import com.pinyougou.pojo.TbBrand;
 import com.pinyougou.sellergoods.service.BrandService;
 import org.springframework.stereotype.Service;
 
+/**
+ * @author frankJiang
+ */
 @Service
 public class BrandServiceImpl implements BrandService {
 
@@ -31,5 +34,27 @@ public class BrandServiceImpl implements BrandService {
         PageInfo<TbBrand> pageInfo = new PageInfo(brandList);
         return new PageResult(pageInfo.getTotal(), pageInfo.getList());
 	}
+
+    @Override
+    public void add(TbBrand tbBrand) {
+        brandMapper.insert(tbBrand);
+    }
+
+    @Override
+    public TbBrand findOne(Long id) {
+        return brandMapper.selectByPrimaryKey(id);
+    }
+
+    @Override
+    public void update(TbBrand tbBrand) {
+        brandMapper.updateByPrimaryKey(tbBrand);
+    }
+
+    @Override
+    public void delete(Long[] ids) {
+        for (Long id : ids) {
+            brandMapper.deleteByPrimaryKey(id);
+        }
+    }
 
 }
