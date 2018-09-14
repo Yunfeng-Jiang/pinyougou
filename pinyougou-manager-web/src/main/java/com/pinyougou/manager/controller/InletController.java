@@ -29,4 +29,9 @@ public class InletController {
         return "admin/brand";
     }
 
+    @RequestMapping("/specification")
+    public String specification() {
+        return "admin/specification";
+    }
+
 }

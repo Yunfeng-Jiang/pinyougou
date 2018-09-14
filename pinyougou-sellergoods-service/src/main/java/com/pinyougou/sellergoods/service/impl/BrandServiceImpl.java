@@ -5,7 +5,6 @@ import java.util.List;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.pinyougou.entity.PageResult;
-import com.pinyougou.entity.Result;
 import com.pinyougou.pojo.TbBrandExample;
 import org.springframework.beans.factory.annotation.Autowired;
 
