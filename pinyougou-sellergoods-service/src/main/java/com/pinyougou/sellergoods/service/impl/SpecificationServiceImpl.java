@@ -55,14 +55,13 @@ public class SpecificationServiceImpl implements SpecificationService {
 	@Override
 	public void add(Specification specification) {
 		//获取规格实体
-		TbSpecification tbspecification = specification.getSpecification();				
-		specificationMapper.insert(tbspecification);	
+		specificationMapper.insert(specification.getSpecification());
 		
 		//获取规格选项集合
 		List<TbSpecificationOption> specificationOptionList = specification.getSpecificationOptionList();
 		for( TbSpecificationOption option:specificationOptionList){
 			// 设置规格ID
-			option.setSpecId(tbspecification.getId());
+			option.setSpecId(specification.getSpecification().getId());
             // 新增规格
 			specificationOptionMapper.insert(option);
 		}

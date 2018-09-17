@@ -77,7 +77,7 @@ app.controller('specificationController' ,function($scope,$controller   ,specifi
 		);
 	};
 	
-	//$scope.entity={specificationOptionList:[]};
+	$scope.entity={specificationOptionList:[]};
 	
 	//增加规格选项行
 	$scope.addTableRow=function(){

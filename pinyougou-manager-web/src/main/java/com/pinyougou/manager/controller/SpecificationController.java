@@ -1,6 +1,4 @@
 package com.pinyougou.manager.controller;
-import java.util.List;
-import java.util.Map;
 
 import com.pinyougou.entity.PageResult;
 import com.pinyougou.entity.Result;
@@ -11,7 +9,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.pinyougou.pojo.TbSpecification;
 import com.pinyougou.sellergoods.service.SpecificationService;
-
+import java.util.List;
+import java.util.Map;
 
 /**
  * @author Akron
@@ -102,7 +101,7 @@ public class SpecificationController {
 	
 		/**
 	 * 查询+分页
-	 * @param brand
+	 * @param specification
 	 * @param page
 	 * @param rows
 	 * @return

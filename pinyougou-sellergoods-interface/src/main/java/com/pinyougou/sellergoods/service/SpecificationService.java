@@ -12,7 +12,6 @@ import com.pinyougou.pojogroup.Specification;
  *
  */
 public interface SpecificationService {
-
 	/**
 	 * 返回全部列表
 	 * @return
