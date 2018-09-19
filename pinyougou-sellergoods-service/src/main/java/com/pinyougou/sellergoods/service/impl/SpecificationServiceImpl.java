@@ -159,7 +159,6 @@ public class SpecificationServiceImpl implements SpecificationService {
 
 		@Override
 		public List<Map> selectOptionList() {
-			// TODO Auto-generated method stub
 			return specificationMapper.selectOptionList();
 		}
 	

@@ -28,4 +28,8 @@ app.service("brandService", function ($http) {
         return $http.post('../brand/search?page=' + page +'&size=' + size, searchEntity);
     };
 
+    //下拉列表数据
+    this.selectOptionList=function(){
+        return $http.get('../brand/selectOptionList');
+    };
 });

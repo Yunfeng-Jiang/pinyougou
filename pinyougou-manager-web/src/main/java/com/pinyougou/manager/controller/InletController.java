@@ -34,4 +34,9 @@ public class InletController {
         return "admin/specification";
     }
 
+    @RequestMapping("/typeTemplate")
+    public String typeTemplate() {
+        return "admin/type_template";
+    }
+
 }

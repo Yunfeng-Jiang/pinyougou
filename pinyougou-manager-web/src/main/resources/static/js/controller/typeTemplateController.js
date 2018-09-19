@@ -1,5 +1,5 @@
  //控制层 
-app.controller('typeTemplateController' ,function($scope,$controller   ,typeTemplateService,brandService,specificationService){	
+app.controller('typeTemplateController' ,function($scope,$controller,typeTemplateService,brandService,specificationService){
 	
 	$controller('baseController',{$scope:$scope});//继承
 	
@@ -10,7 +10,7 @@ app.controller('typeTemplateController' ,function($scope,$controller   ,typeTemp
 				$scope.list=response;
 			}			
 		);
-	}    
+	};
 	
 	//分页
 	$scope.findPage=function(page,rows){			
@@ -20,7 +20,7 @@ app.controller('typeTemplateController' ,function($scope,$controller   ,typeTemp
 				$scope.paginationConf.totalItems=response.total;//更新总记录数
 			}			
 		);
-	}
+	};
 	
 	//查询实体 
 	$scope.findOne=function(id){				
@@ -35,7 +35,7 @@ app.controller('typeTemplateController' ,function($scope,$controller   ,typeTemp
 				
 			}
 		);				
-	}
+	};
 	
 	//保存 
 	$scope.save=function(){				
@@ -55,7 +55,7 @@ app.controller('typeTemplateController' ,function($scope,$controller   ,typeTemp
 				}
 			}		
 		);				
-	}
+	};
 	
 	 
 	//批量删除 
@@ -69,7 +69,7 @@ app.controller('typeTemplateController' ,function($scope,$controller   ,typeTemp
 				}						
 			}		
 		);				
-	}
+	};
 	
 	$scope.searchEntity={};//定义搜索对象 
 	
@@ -81,7 +81,7 @@ app.controller('typeTemplateController' ,function($scope,$controller   ,typeTemp
 				$scope.paginationConf.totalItems=response.total;//更新总记录数
 			}			
 		);
-	}
+	};
 	
 	$scope.brandList={data:[]};//品牌列表
     
@@ -92,7 +92,7 @@ app.controller('typeTemplateController' ,function($scope,$controller   ,typeTemp
 				$scope.brandList={data:response};
 			}
 		);		
-	}
+	};
 	
 	$scope.specList={data:[]};//规格列表
 	
@@ -103,15 +103,15 @@ app.controller('typeTemplateController' ,function($scope,$controller   ,typeTemp
 					$scope.specList={data:response};
 				}
 		);		
-	}
+	};
 	
 	//增加扩展属性行
 	$scope.addTableRow=function(){
 		$scope.entity.customAttributeItems.push({});
-	}
+	};
 	//删除扩展属性行
 	$scope.deleTableRow=function(index){
 		$scope.entity.customAttributeItems.splice( index,1);
-	}
-	
+	};
+
 });	
