@@ -1,7 +1,4 @@
-package com.pinyougou.mapper; /**
- * e-BuyChina.com.cn Inc.
- * Copyright (c) 2006-2018 All Rights Reserved.
- */
+package com.pinyougou.mapper;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
