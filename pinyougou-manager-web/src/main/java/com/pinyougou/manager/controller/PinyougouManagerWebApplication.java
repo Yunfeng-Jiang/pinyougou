@@ -16,6 +16,6 @@ public class PinyougouManagerWebApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(PinyougouManagerWebApplication.class, args);
-        System.out.println("~~~~~~~~~~Spring-Cloud-Consumer启动完毕！~~~~~~~~~~~");
+        System.out.println("~~~~~~~~~~pinyougou-manager-web 启动完毕！~~~~~~~~~~~");
     }
 }

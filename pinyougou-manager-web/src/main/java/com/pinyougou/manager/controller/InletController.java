@@ -39,4 +39,9 @@ public class InletController {
         return "admin/type_template";
     }
 
+    @RequestMapping("/sellerCheck")
+    public String sellerCheck() {
+        return "admin/seller_1";
+    }
+
 }
