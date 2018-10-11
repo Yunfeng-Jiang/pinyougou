@@ -7,7 +7,7 @@ server:
   port: 8082
 spring:
   application:
-    name: pinyougou-shop-web
+    name: consumer-pinyougou-shop-web
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: root

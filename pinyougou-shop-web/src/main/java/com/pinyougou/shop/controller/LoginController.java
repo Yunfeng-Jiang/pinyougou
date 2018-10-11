@@ -1,4 +1,4 @@
-package com.pinyougou.manager.controller;
+package com.pinyougou.shop.controller;
 
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -9,7 +9,7 @@ import java.util.Map;
 
 /**
  * <pre>
- * 主页显示登录名
+ *  主页显示登录名
  * </pre>
  *
  * @author frankJiang

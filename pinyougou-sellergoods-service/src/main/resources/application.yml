@@ -9,7 +9,7 @@ server:
   port: 20880
 spring:
   application:
-    name: provider-sellergoods-service
+    name: provider-pinyougou-sellergoods-service
   cloud:
     config:
       uri: "http://localhost:8080"

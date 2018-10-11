@@ -19,4 +19,14 @@ public class InletController {
         return "shoplogin";
     }
 
+    @RequestMapping("/index")
+    public String index() {
+        return "admin/index";
+    }
+
+    @RequestMapping("/home")
+    public String home() {
+        return "admin/home";
+    }
+
 }

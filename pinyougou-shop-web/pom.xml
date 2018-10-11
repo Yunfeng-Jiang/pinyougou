@@ -30,7 +30,12 @@
     </dependencyManagement>
 
     <dependencies>
-        <!-- 必须添加thymeleaf依赖 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+        </dependency>
+
+        <!-- @Controller必须配合模版来使用，否则网页无法显示-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-thymeleaf</artifactId>
