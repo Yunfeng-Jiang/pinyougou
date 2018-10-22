@@ -10,7 +10,7 @@ app.controller('itemCatController' ,function($scope,$controller   ,itemCatServic
 				$scope.list=response;
 			}			
 		);
-	}    
+	};
 	
 	//分页
 	$scope.findPage=function(page,rows){			
@@ -20,7 +20,7 @@ app.controller('itemCatController' ,function($scope,$controller   ,itemCatServic
 				$scope.paginationConf.totalItems=response.total;//更新总记录数
 			}			
 		);
-	}
+	};
 	
 	//查询实体 
 	$scope.findOne=function(id){				
@@ -29,27 +29,27 @@ app.controller('itemCatController' ,function($scope,$controller   ,itemCatServic
 				$scope.entity= response;					
 			}
 		);				
-	}
+	};
 	
 	//保存 
-	$scope.save=function(){				
+	$scope.save = function() {
 		var serviceObject;//服务层对象  				
 		if($scope.entity.id!=null){//如果有ID
-			serviceObject=itemCatService.update( $scope.entity ); //修改  
+			serviceObject=itemCatService.update($scope.entity); //修改
 		}else{
-			serviceObject=itemCatService.add( $scope.entity  );//增加 
+            $scope.entity.parentId = $scope.parentId; //赋予上级ID
+			serviceObject=itemCatService.add($scope.entity);//增加
 		}				
 		serviceObject.success(
 			function(response){
 				if(response.success){
-					//重新查询 
-		        	$scope.reloadList();//重新加载
+                    $scope.findByParentId($scope.parentId); //重新加载
 				}else{
 					alert(response.message);
 				}
 			}		
 		);				
-	}
+	};
 	
 	 
 	//批量删除 
@@ -63,7 +63,7 @@ app.controller('itemCatController' ,function($scope,$controller   ,itemCatServic
 				}						
 			}		
 		);				
-	}
+	};
 	
 	$scope.searchEntity={};//定义搜索对象 
 	
@@ -75,6 +75,44 @@ app.controller('itemCatController' ,function($scope,$controller   ,itemCatServic
 				$scope.paginationConf.totalItems=response.total;//更新总记录数
 			}			
 		);
-	}
-    
+	};
+
+    $scope.parentId=0;//上级ID
+	//根据上级分类ID查询列表
+	$scope.findByParentId=function(parentId){
+        $scope.parentId = parentId; // 记录上级ID
+		itemCatService.findByParentId(parentId).success(
+			function(response){
+				$scope.list=response;				
+			}
+		);		
+	};
+	
+	$scope.grade=1;//当前级别
+	//设置级别 
+	$scope.setGrade=function(value){
+		$scope.grade=value;
+	};
+	
+	
+	$scope.selectList=function(p_entity){
+		//alert($scope.grade);
+		
+		if($scope.grade==1){
+			$scope.entity_1=null;
+			$scope.entity_2=null;
+		}
+		if($scope.grade==2){
+			
+			$scope.entity_1=p_entity;
+			$scope.entity_2=null;
+		}
+		if($scope.grade==3){
+			$scope.entity_2=p_entity;
+		}
+		
+		$scope.findByParentId(p_entity.id);
+		
+	};
+
 });	

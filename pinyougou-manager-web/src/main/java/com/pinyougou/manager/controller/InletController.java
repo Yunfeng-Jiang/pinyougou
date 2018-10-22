@@ -44,4 +44,9 @@ public class InletController {
         return "admin/seller_1";
     }
 
+    @RequestMapping("/itemCat")
+    public String itemCat() {
+        return "admin/item_cat";
+    }
+
 }
