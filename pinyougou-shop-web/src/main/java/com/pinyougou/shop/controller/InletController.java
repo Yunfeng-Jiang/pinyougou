@@ -27,6 +27,12 @@ public class InletController {
     @RequestMapping("/home")
     public String home() {
         return "admin/home";
+
+    }@RequestMapping("/addGood")
+    public String addGood() {
+        return "admin/goods_edit";
     }
+
+
 
 }

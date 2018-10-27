@@ -1,16 +1,19 @@
 package com.pinyougou.sellergoods.service.impl;
-import java.util.List;
 
-import com.pinyougou.entity.PageResult;
-import org.springframework.beans.factory.annotation.Autowired;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
+import com.pinyougou.entity.PageResult;
+import com.pinyougou.mapper.TbGoodsDescMapper;
 import com.pinyougou.mapper.TbGoodsMapper;
 import com.pinyougou.pojo.TbGoods;
 import com.pinyougou.pojo.TbGoodsExample;
 import com.pinyougou.pojo.TbGoodsExample.Criteria;
+import com.pinyougou.pojogroup.Goods;
 import com.pinyougou.sellergoods.service.GoodsService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 
 /**
@@ -23,8 +26,12 @@ public class GoodsServiceImpl implements GoodsService {
 
 	@Autowired
 	private TbGoodsMapper goodsMapper;
-	
-	/**
+
+    @Autowired
+    private TbGoodsDescMapper goodsDescMapper;
+
+
+    /**
 	 * 查询全部
 	 */
 	@Override
@@ -118,5 +125,14 @@ public class GoodsServiceImpl implements GoodsService {
 		Page<TbGoods> page= (Page<TbGoods>)goodsMapper.selectByExample(example);		
 		return new PageResult(page.getTotal(), page.getResult());
 	}
-	
+
+	@Override
+	public void add(Goods goods) {
+        goods.getGoods().setAuditStatus("0");//设置未申请状态
+        goodsMapper.insert(goods.getGoods());
+        goods.getGoodsDesc().setGoodsId(goods.getGoods().getId());//设置ID
+        goodsDescMapper.insert(goods.getGoodsDesc());//插入商品扩展数据
+
+    }
+
 }
