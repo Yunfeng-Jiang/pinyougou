@@ -1,5 +1,5 @@
  //控制层 
-app.controller('goodsController' ,function($scope,$controller   ,goodsService){	
+app.controller('goodsController' ,function($scope, $controller, goodsService, uploadService){
 	
 	$controller('baseController',{$scope:$scope});//继承
 	
@@ -10,7 +10,7 @@ app.controller('goodsController' ,function($scope,$controller   ,goodsService){
 				$scope.list=response;
 			}			
 		);
-	}    
+	};
 	
 	//分页
 	$scope.findPage=function(page,rows){			
@@ -20,7 +20,7 @@ app.controller('goodsController' ,function($scope,$controller   ,goodsService){
 				$scope.paginationConf.totalItems=response.total;//更新总记录数
 			}			
 		);
-	}
+	};
 	
 	//查询实体 
 	$scope.findOne=function(id){				
@@ -29,20 +29,20 @@ app.controller('goodsController' ,function($scope,$controller   ,goodsService){
 				$scope.entity= response;					
 			}
 		);				
-	}
+	};
 
     $scope.add=function(){
         goodsService.add( $scope.entity  ).success(
             function(response){
                 if(response.success){
-                    alert('保存成功');
+                    alert("保存成功");
                     $scope.entity={};
                 }else{
                     alert(response.message);
                 }
             }
         );
-    }
+    };
 
 
     //保存
@@ -63,7 +63,7 @@ app.controller('goodsController' ,function($scope,$controller   ,goodsService){
 				}
 			}		
 		);				
-	}
+	};
 	
 	 
 	//批量删除 
@@ -77,7 +77,7 @@ app.controller('goodsController' ,function($scope,$controller   ,goodsService){
 				}						
 			}		
 		);				
-	}
+	};
 	
 	$scope.searchEntity={};//定义搜索对象 
 	
@@ -89,6 +89,33 @@ app.controller('goodsController' ,function($scope,$controller   ,goodsService){
 				$scope.paginationConf.totalItems=response.total;//更新总记录数
 			}			
 		);
-	}
-    
+	};
+
+    $scope.entity={goods:{},goodsDesc:{itemImages:[]}};//定义页面实体结构
+    //添加图片列表
+    $scope.add_image_entity=function(){
+        $scope.entity.goodsDesc.itemImages.push($scope.image_entity);
+    };
+
+    //列表中移除图片
+    $scope.remove_image_entity=function(index){
+        $scope.entity.goodsDesc.itemImages.splice(index,1);
+    };
+
+    /**
+     * 上传图片
+     */
+    $scope.uploadFile=function(){
+        uploadService.uploadFile().success(function(response) {
+            if(response.success){//如果上传成功，取出url
+                $scope.image_entity.url=response.message;//设置文件地址
+            }else{
+                alert(response.message);
+            }
+        }).error(function() {
+            alert("上传发生错误");
+        });
+    };
+
+
 });	
