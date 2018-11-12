@@ -1,11 +1,16 @@
 package com.pinyougou.sellergoods.service.impl;
 import java.util.List;
+import java.util.Map;
 
+import com.alibaba.fastjson.JSON;
 import com.pinyougou.entity.PageResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
+import com.pinyougou.mapper.TbSpecificationOptionMapper;
 import com.pinyougou.mapper.TbTypeTemplateMapper;
+import com.pinyougou.pojo.TbSpecificationOption;
+import com.pinyougou.pojo.TbSpecificationOptionExample;
 import com.pinyougou.pojo.TbTypeTemplate;
 import com.pinyougou.pojo.TbTypeTemplateExample;
 import com.pinyougou.pojo.TbTypeTemplateExample.Criteria;
@@ -23,7 +28,10 @@ public class TypeTemplateServiceImpl implements TypeTemplateService {
 
 	@Autowired
 	private TbTypeTemplateMapper typeTemplateMapper;
-	
+
+	@Autowired
+	private TbSpecificationOptionMapper specificationOptionMapper;
+
 	/**
 	 * 查询全部
 	 */
@@ -37,7 +45,7 @@ public class TypeTemplateServiceImpl implements TypeTemplateService {
 	 */
 	@Override
 	public PageResult findPage(int pageNum, int pageSize) {
-		PageHelper.startPage(pageNum, pageSize);		
+		PageHelper.startPage(pageNum, pageSize);
 		Page<TbTypeTemplate> page=   (Page<TbTypeTemplate>) typeTemplateMapper.selectByExample(null);
 		return new PageResult(page.getTotal(), page.getResult());
 	}
@@ -47,18 +55,18 @@ public class TypeTemplateServiceImpl implements TypeTemplateService {
 	 */
 	@Override
 	public void add(TbTypeTemplate typeTemplate) {
-		typeTemplateMapper.insert(typeTemplate);		
+		typeTemplateMapper.insert(typeTemplate);
 	}
 
-	
+
 	/**
 	 * 修改
 	 */
 	@Override
 	public void update(TbTypeTemplate typeTemplate){
 		typeTemplateMapper.updateByPrimaryKey(typeTemplate);
-	}	
-	
+	}
+
 	/**
 	 * 根据ID获取实体
 	 * @param id
@@ -76,19 +84,19 @@ public class TypeTemplateServiceImpl implements TypeTemplateService {
 	public void delete(Long[] ids) {
 		for(Long id:ids){
 			typeTemplateMapper.deleteByPrimaryKey(id);
-		}		
+		}
 	}
-	
-	
-		@Override
+
+
+	@Override
 	public PageResult findPage(TbTypeTemplate typeTemplate, int pageNum, int pageSize) {
 		PageHelper.startPage(pageNum, pageSize);
-		
+
 		TbTypeTemplateExample example=new TbTypeTemplateExample();
 		Criteria criteria = example.createCriteria();
-		
-		if(typeTemplate!=null){			
-						if(typeTemplate.getName()!=null && typeTemplate.getName().length()>0){
+
+		if(typeTemplate!=null){
+			if(typeTemplate.getName()!=null && typeTemplate.getName().length()>0){
 				criteria.andNameLike("%"+typeTemplate.getName()+"%");
 			}
 			if(typeTemplate.getSpecIds()!=null && typeTemplate.getSpecIds().length()>0){
@@ -100,11 +108,34 @@ public class TypeTemplateServiceImpl implements TypeTemplateService {
 			if(typeTemplate.getCustomAttributeItems()!=null && typeTemplate.getCustomAttributeItems().length()>0){
 				criteria.andCustomAttributeItemsLike("%"+typeTemplate.getCustomAttributeItems()+"%");
 			}
-	
+
 		}
-		
-		Page<TbTypeTemplate> page= (Page<TbTypeTemplate>)typeTemplateMapper.selectByExample(example);		
+
+		Page<TbTypeTemplate> page= (Page<TbTypeTemplate>)typeTemplateMapper.selectByExample(example);
 		return new PageResult(page.getTotal(), page.getResult());
+	}
+
+
+
+	@Override
+	public List<Map> findSpecList(Long id) {
+		//查询模板
+		TbTypeTemplate typeTemplate = typeTemplateMapper.selectByPrimaryKey(id);
+
+		List<Map> list = JSON.parseArray(typeTemplate.getSpecIds(), Map.class)  ;
+
+        for(Map map:list){
+
+			//查询规格选项列表
+			TbSpecificationOptionExample example=new TbSpecificationOptionExample();
+			com.pinyougou.pojo.TbSpecificationOptionExample.Criteria criteria = example.createCriteria();
+			criteria.andSpecIdEqualTo( new Long( (Integer)map.get("id") ) );
+			List<TbSpecificationOption> options = specificationOptionMapper.selectByExample(example);
+
+			map.put("options", options);
+		}
+
+		return list;
 	}
 
 

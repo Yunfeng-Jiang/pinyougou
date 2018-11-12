@@ -1,5 +1,6 @@
 package com.pinyougou.sellergoods.service;
 import java.util.List;
+import java.util.Map;
 
 import com.pinyougou.entity.PageResult;
 import com.pinyougou.pojo.TbTypeTemplate;
@@ -16,26 +17,26 @@ public interface TypeTemplateService {
 	 * @return
 	 */
 	List<TbTypeTemplate> findAll();
-	
-	
+
+
 	/**
 	 * 返回分页列表
 	 * @return
 	 */
 	PageResult findPage(int pageNum, int pageSize);
-	
-	
+
+
 	/**
 	 * 增加
 	*/
 	void add(TbTypeTemplate typeTemplate);
-	
-	
+
+
 	/**
 	 * 修改
 	 */
 	void update(TbTypeTemplate typeTemplate);
-	
+
 
 	/**
 	 * 根据ID获取实体
@@ -43,8 +44,8 @@ public interface TypeTemplateService {
 	 * @return
 	 */
 	TbTypeTemplate findOne(Long id);
-	
-	
+
+
 	/**
 	 * 批量删除
 	 * @param ids
@@ -58,7 +59,14 @@ public interface TypeTemplateService {
 	 * @return
 	 */
 	PageResult findPage(TbTypeTemplate typeTemplate, int pageNum, int pageSize);
-	
 
-	
+	/**
+	 * 返回规格列表
+	 * @param id
+	 * @return
+	 */
+	List<Map> findSpecList(Long id);
+
+
+
 }
