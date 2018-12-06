@@ -35,17 +35,18 @@ public interface GoodsService {
 	/**
 	 * 修改
 	 */
-	void update(TbGoods goods);
-	
+	void update(Goods goods);
+
 
 	/**
 	 * 根据ID获取实体
 	 * @param id
 	 * @return
 	 */
-	TbGoods findOne(Long id);
-	
-	
+	Goods findOne(Long id);
+
+
+
 	/**
 	 * 批量删除
 	 * @param ids
@@ -64,5 +65,13 @@ public interface GoodsService {
      * 增加
      */
 	void add(Goods goods);
-	
+
+	/**
+	 * 批量修改状态
+	 * @param ids
+	 * @param status
+	 */
+	void updateStatus(Long []ids,String status);
+
+
 }

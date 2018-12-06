@@ -1,5 +1,5 @@
  //控制层 
-app.controller('goodsController' ,function($scope,$controller   ,goodsService){	
+app.controller('goodsController' ,function($scope,$controller ,goodsService,itemCatService){
 	
 	$controller('baseController',{$scope:$scope});//继承
 	
@@ -10,7 +10,7 @@ app.controller('goodsController' ,function($scope,$controller   ,goodsService){
 				$scope.list=response;
 			}			
 		);
-	}    
+	};
 	
 	//分页
 	$scope.findPage=function(page,rows){			
@@ -20,7 +20,7 @@ app.controller('goodsController' ,function($scope,$controller   ,goodsService){
 				$scope.paginationConf.totalItems=response.total;//更新总记录数
 			}			
 		);
-	}
+	};
 	
 	//查询实体 
 	$scope.findOne=function(id){				
@@ -29,7 +29,7 @@ app.controller('goodsController' ,function($scope,$controller   ,goodsService){
 				$scope.entity= response;					
 			}
 		);				
-	}
+	};
 	
 	//保存 
 	$scope.save=function(){				
@@ -49,7 +49,7 @@ app.controller('goodsController' ,function($scope,$controller   ,goodsService){
 				}
 			}		
 		);				
-	}
+	};
 	
 	 
 	//批量删除 
@@ -63,7 +63,7 @@ app.controller('goodsController' ,function($scope,$controller   ,goodsService){
 				}						
 			}		
 		);				
-	}
+	};
 	
 	$scope.searchEntity={};//定义搜索对象 
 	
@@ -75,6 +75,38 @@ app.controller('goodsController' ,function($scope,$controller   ,goodsService){
 				$scope.paginationConf.totalItems=response.total;//更新总记录数
 			}			
 		);
-	}
-    
+	};
+
+    $scope.status=['未审核','已审核','审核未通过','关闭'];//商品状态
+    $scope.itemCatList=[];//商品分类列表
+    //查询商品分类
+    $scope.findItemCatList=function(){
+        itemCatService.findAll().success(
+            function(response){
+                for(var i=0;i<response.length;i++){
+                    $scope.itemCatList[response[i].id ]=response[i].name;
+                }
+            }
+        );
+    };
+
+    //更改状态
+    this.updateStatus=function(ids,status){
+        return $http.get('../goods/updateStatus?ids='+ids+"&status="+status);
+    };
+
+    //更改状态
+    $scope.updateStatus=function(status){
+        goodsService.updateStatus($scope.selectIds,status).success(
+            function(response){
+                if(response.success){//成功
+                    $scope.reloadList();//刷新列表
+                    $scope.selectIds=[];//清空ID集合
+                }else{
+                    alert(response.message);
+                }
+            }
+        );
+    };
+
 });	

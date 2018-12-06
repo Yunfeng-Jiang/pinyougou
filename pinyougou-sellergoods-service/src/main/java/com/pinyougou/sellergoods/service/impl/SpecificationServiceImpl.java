@@ -16,6 +16,7 @@ import com.pinyougou.pojo.TbSpecificationOptionExample;
 import com.pinyougou.pojogroup.Specification;
 import com.pinyougou.sellergoods.service.SpecificationService;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * 服务实现层
@@ -23,6 +24,7 @@ import org.springframework.stereotype.Service;
  *
  */
 @Service
+@Transactional(rollbackFor = Exception.class)
 public class SpecificationServiceImpl implements SpecificationService {
 
 	@Autowired

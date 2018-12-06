@@ -1,7 +1,10 @@
 package com.pinyougou.shop.controller;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  * 页面入口跳转Controller
@@ -30,7 +33,10 @@ public class InletController {
     }
 
     @RequestMapping("/addGood")
-    public String addGood() {
+    public String addGood(Model model, @RequestParam(value = "id", required = false, defaultValue = "") String id) {
+        if (StringUtils.isNotEmpty(id)) {
+            model.addAttribute("id", id);
+        }
         return "admin/goods_edit";
     }
 

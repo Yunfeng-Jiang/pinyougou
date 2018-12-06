@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<html>
 
 <head>
 	<!-- 页面meta -->
@@ -35,8 +34,7 @@
 
 </head>
 
-<body class="hold-transition skin-red sidebar-mini" ng-app="pinyougou" ng-controller="goodsController" ng-init="selectItemCat1List()">
-
+<body class="hold-transition skin-red sidebar-mini" ng-app="pinyougou" ng-controller="goodsController" ng-init="selectItemCat1List();findOne()">
 <!-- 正文区域 -->
 <section class="content">
 
@@ -172,10 +170,10 @@
 				<!--扩展属性-->
 				<div class="tab-pane" id="customAttribute">
 					<div class="row data-type">
-						<div ng-repeat="item in entity.goodsDesc.customAttributeItems">
-							<div class="col-md-2 title">{{item.text}}</div>
+                        <div ng-repeat="pojo in entity.goodsDesc.customAttributeItems">
+                            <div class="col-md-2 title">{{pojo.text}}</div>
 							<div class="col-md-10 data">
-								<input class="form-control" placeholder="{{item.text}}" ng-model="item.value">
+                                <input class="form-control" ng-model="pojo.value" placeholder="{{pojo.text}}">
 							</div>
 						</div>
 
@@ -199,15 +197,12 @@
 							<div ng-repeat="pojo in specList">
 								<div class="col-md-2 title">{{pojo.text}}</div>
 								<div class="col-md-10 data">
-					                               
 					                            <span ng-repeat="option in pojo.options">
-					                            	<input  type="checkbox" ng-click="updateSpecAttribute($event,pojo.text,option.optionName);createItemList()" >{{option.optionName}}					                            				                            	
+					                            	<input  type="checkbox" ng-click="updateSpecAttribute($event,pojo.text,p.optionName);createSKUTable()" ng-checked="checkAttributeValue(pojo.text,p.optionName)">{{p.optionName}}
 					                            </span>
 
 								</div>
 							</div>
-							{{entity.itemList}}
-
 						</div>
 
 
@@ -263,8 +258,8 @@
 
 	</div>
 	<div class="btn-toolbar list-toolbar">
-		<button class="btn btn-primary" ng-click="add()"><i class="fa fa-save"></i>保存</button>
-		<button class="btn btn-default" >返回列表</button>
+        <button class="btn btn-primary" ng-click="save()"><i class="fa fa-save"></i>保存</button>
+		<a href="/goods" class="btn btn-default">返回列表</a>
 	</div>
 
 </section>
